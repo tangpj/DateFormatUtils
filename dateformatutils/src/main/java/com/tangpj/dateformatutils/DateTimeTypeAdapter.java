@@ -47,6 +47,7 @@ public class DateTimeTypeAdapter extends TypeAdapter<DateTime>{
     public synchronized void write(JsonWriter out, DateTime value) throws IOException {
         if (value == null){
             out.nullValue();
+            return;
         }
         String dateTimeFormatStr = value.toString(dateTimeFormatter);
         out.value(dateTimeFormatStr);
