@@ -13,7 +13,9 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(DateTime.class, new DateTimeTypeAdapter())
                 .create();
@@ -38,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
         DateTime isoDateTime = gson.fromJson(ISO8061_STR,DateTime.class);
         System.out.println(isoDateTime);
         System.out.println(DateFormatUtils.format(isoDateTime));
+        System.out.println("============================");
 
         DateTimeFormatter weiboFormat =  DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss Z yyyy")
-                .withLocale(Locale.US)
-                .withZone(DateTimeZone.forID("+08:00"));
+                .withLocale(Locale.US).withZone(DateTimeZone.forID("+08:00"));
         Gson gson1 = new GsonBuilder()
                 .registerTypeAdapter(DateTime.class
                         ,new DateTimeTypeAdapter(weiboFormat))
@@ -55,4 +58,6 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(DateFormatUtils.format(gson1.fromJson(WEIBO_STR6,DateTime.class)));
 
     }
+
+
 }

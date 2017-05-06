@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
 
 import java.util.Locale;
@@ -54,5 +55,20 @@ public class ExampleUnitTest {
         System.out.println(DateFormatUtils.format(gson1.fromJson(WEIBO_STR4,DateTime.class)));
         System.out.println(DateFormatUtils.format(gson1.fromJson(WEIBO_STR5,DateTime.class)));
         System.out.println(DateFormatUtils.format(gson1.fromJson(WEIBO_STR6,DateTime.class)));
+    }
+
+    @Test
+    public void addition_isCorrect1() throws Exception {
+        DateTimeFormatter dateTimeFormatter = ISODateTimeFormat.dateTimeNoMillis();
+        DateTime dateTime = dateTimeFormatter.parseDateTime("2017-05-05T06:44:16Z");
+        System.out.println(dateTime);
+
+        DateTimeFormatter dateTimeFormatter1 = DateTimeFormat
+                .forPattern("EEE MMM dd HH:mm:ss Z yyyy")
+                .withLocale(Locale.US)
+                .withZone(DateTimeZone.forID("+08:00"));
+        DateTime dateTime1 = dateTimeFormatter1.parseDateTime("Sun Apr 16 06:00:19 +0800 2017");
+
+        System.out.println(dateTime1.toString(dateTimeFormatter1));
     }
 }

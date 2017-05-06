@@ -24,7 +24,7 @@ public class DateTimeTypeAdapter extends TypeAdapter<DateTime>{
     private final DateTimeFormatter dateTimeFormatter;
 
     public DateTimeTypeAdapter(){
-        this.dateTimeFormatter = ISODateTimeFormat.dateTimeNoMillis();
+        this(ISODateTimeFormat.dateTimeNoMillis());
     }
 
     public DateTimeTypeAdapter(DateTimeFormatter dateTimeFormatter){
